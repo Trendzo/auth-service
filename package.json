@@ -4,9 +4,21 @@
   "description": "��#\u0000 \u0000a\u0000u\u0000t\u0000h\u0000-\u0000s\u0000e\u0000r\u0000v\u0000i\u0000c\u0000e\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jwt-simple": "^0.5.6",
+    "mongodb": "^6.16.0",
+    "mongoose": "^8.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
