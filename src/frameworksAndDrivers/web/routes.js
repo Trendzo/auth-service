@@ -1,17 +1,40 @@
 // src/frameworksAndDrivers/web/routes.js
-const authRouter     = require('../../interfaceAdapters/controllers/AuthController');
-const profileRouter  = require('../../interfaceAdapters/controllers/ProfileController');
-const authMiddleware = require('../../interfaceAdapters/middlewares/authMiddleware');
-// If you want role-based, uncomment next line:
-// const authorizeRoles = require('../../interfaceAdapters/middlewares/authorizeRoles');
+const userAuth        = require('../../interfaceAdapters/controllers/UserAuthController');
+const adminAuth       = require('../../interfaceAdapters/controllers/AdminAuthController');
+const storeAuth       = require('../../interfaceAdapters/controllers/StoreAuthController');
+
+const userController  = require('../../interfaceAdapters/controllers/UserController');
+const adminController = require('../../interfaceAdapters/controllers/AdminController');
+const storeController = require('../../interfaceAdapters/controllers/StoreController');
+
+const authMiddleware  = require('../../interfaceAdapters/middlewares/authMiddleware');
+const authorizeRoles  = require('../../interfaceAdapters/middlewares/authorizeRoles');
 
 module.exports = (app) => {
-  app.use('/auth', authRouter);
+  // === Public, role-specific auth endpoints (no token required) ===
+  app.use('/user/auth',  userAuth);
+  app.use('/admin/auth', adminAuth);
+  app.use('/store/auth', storeAuth);
 
-  // all /profile calls must pass authMiddleware
-  app.use('/profile',
+  // === Protected, role-based APIs ===
+  app.use(
+    '/user',
     authMiddleware,
-    // authorizeRoles('admin','user','store'),  // <-- if you need role checks
-    profileRouter
+    authorizeRoles('user'),
+    userController
+  );
+
+  app.use(
+    '/admin',
+    authMiddleware,
+    authorizeRoles('admin'),
+    adminController
+  );
+
+  app.use(
+    '/store',
+    authMiddleware,
+    authorizeRoles('store'),
+    storeController
   );
 };
