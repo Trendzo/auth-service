@@ -1,0 +1,39 @@
+# Runtime / OS
+node_modules/
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Environment
+.env
+.env.*.local
+
+# Build / coverage
+coverage/
+*.lcov
+dist/
+build/
+
+# IDEs / editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Docker
+docker-compose.override.yml
+*.env     # if you keep docker env files here; otherwise ignore only .env
+
+# Misc
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
