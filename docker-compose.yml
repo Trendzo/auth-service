@@ -1,0 +1,19 @@
+services:
+  auth-service:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb+srv://trendzodevelopment:AIB2025@cluster0.y3fglpy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - JWT_SECRET=your-secret-key-here
+      - JWT_EXPIRATION=86400000
+    networks:
+      - auth-network
+
+networks:
+  auth-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
